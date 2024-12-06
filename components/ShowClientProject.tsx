@@ -38,36 +38,53 @@ const ShowClientProject = ({ response }: { response: any }) => {
     }, [response]);
 
     return (
-        <div className="min-h-screen flex justify-center items-center flex-col">
-            <div className="heading">
-                <h2 className="font-extrabold my-10 text-4xl">{projectTitle || "Client Project"}</h2>
+        <div className="flex flex-col items-center justify-center mt-20">
+
+            {/* Title : */}
+            <div className="mt-10 mb-5">
+                <h2 className="font-extrabold text-4xl ">{projectTitle || "Client Project"}</h2>
             </div>
 
-            {projectImage ? (
-                <div className="w-[600px] h-[400px]  flex">
+            {/*  Image : */}
+            <div className="">
+                {
+                    projectImage &&
                     <Image
                         src={projectImage}
                         alt={projectTitle || "Client Project Image"}
-                        width={1000} // Set desired width
-                        height={1000} // Set desired height
+                        width={400}
+                        height={400}
                         style={{ objectFit: "cover" }}
-                        className="rounded-2xl border-yellow-500 "
+                        className="px-5  border-yellow-500"
+                        layout="intrinsic"
                     />
-                </div>
+                }
+            </div>
 
-            ) : (
-                <p>Image not available</p>
-            )}
-            {showPrototype && (
-                <button className="border-yellow-500 font-medium flex gap-3 items-center border px-3 py-3 mt-8">
-                    <a href={showPrototype}>
-                        View Prototype
-                    </a>
-                    <i className="bi bi-box-arrow-up-right"></i>
-                </button>
-            )}
+            {/* Button  */}
+            <div className="">
+                {showPrototype && (
+                    <button className="border-yellow-500 font-medium flex gap-3 items-center border px-3 py-3 my-8">
+                        <a href={showPrototype}>
+                            View Prototype
+                        </a>
+                        <i className="bi bi-box-arrow-up-right"></i>
+                    </button>
+                )}
+            </div>
+
         </div>
     );
 };
 
 export default ShowClientProject;
+
+{/* <style jsx>{`
+    .image-container {
+        width: 100%;  // Ensure the container is responsive
+        height: auto; // Maintain the image's aspect ratio as the container resizes
+    }
+    .object-cover {
+        object-fit: cover;  // Ensure the image fits correctly
+    }
+`}</style> */}
