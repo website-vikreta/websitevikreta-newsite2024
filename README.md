@@ -1,84 +1,27 @@
-   <div className="flex flex-col gap-2" key={idx}>
+# Website Vikreta POrtfolio
 
-                        <div className="flex  relative items-center md:flex-col">
-                          <div className="flex  flex-1 flex-wrap items-center gap-[21px] md:self-stretch">
-                            <Heading size="headingmd" as="h5">
-                              {val.username}
+## Installation
 
-                              <Text size="texts" as="p" className="">
-                                {date}
-                              </Text>
-                            </Heading>
+Follow these steps to get your Next.js project up and running:
 
-                          </div>
-                          <div className="flex w-[42%] justify-center gap-2 self-end md:w-full md:self-auto">
+### 1. Clone the repository
 
-                             <div
-                              onClick={() => toggleInputBox(val._id)}
-                              className="flex  items-center cursor-pointer justify-end gap-[9px]">
-                              <ReplyAll
-                                width={18}
-                                height={20}
-                                alt="Question Icon"
-                                className="h-[20px]"
-                              />
-                              <Text size="texts" as="p" className="!text-colors1">
-                                Reply
-                              </Text>
-                            </div>
-                          </div>
-                        </div>
+Clone this repository to your local machine:
 
-                        <div className="flex flex-col gap-2">
-                          <Text as="p" className="leading-[22px]">
-                            {val.commentbox}
-                          </Text>
-                          {/* Reply-comment  */}
+```bash
+git clone https://github.com/your-username/your-nextjs-project.git 
+```
 
-                          {
-                            val.commentReplies?.map((replyComment, idx) => {
-                              return (
-                                <div className="ml-3" key={idx}>
-                                  <h3 className="text-yellow-400 font-[500] text-lg">{replyComment.username}</h3>
-                                  <Text >{replyComment.comment}</Text>
-                                </div>
-                              )
-                            })
-                          }
-                        </div>
+### 2. Navigate to your project directory
 
+```bash
+cd your-nextjs-project
+```
 
-                        {/* Show input box if the reply is clicked */}
+### 3. Install the dependencies
 
-
-
-                        {/* Reply comment  */}
-                        {
-                          showInputBox[val._id] &&
-                          <div className="ml-2">
-
-                            <form action="" onSubmit={(e) => replyCommentFormHandler(e, val._id)}>
-                              <Input
-                                required
-                                onChange={replyInputHandle}
-                                value={replyCommentData}
-                                type="text"
-                                name="replycomment"
-                                placeholder={`Reply`}
-                                className="w-96  px-2 py-2 rounded-sm "
-                              />
-
-                              <Button
-                                type='submit'
-                                size="lg"
-                                shape="square"
-                                className="min-w-[152px] mt-5 font-bold text-yellow-400"
-                              >
-                                Submit
-                              </Button>
-                            </form>
-
-                          </div>
-                        }
-
-                      </div>
+```bash
+npm install
+# or
+yarn install
+```
