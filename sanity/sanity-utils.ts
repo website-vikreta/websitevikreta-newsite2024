@@ -5,10 +5,10 @@ import { createClient, groq } from "next-sanity";
 // ! ===============================================================
 // #region Global Declarations
 const client = createClient({
-   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
-   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "",
-   apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "",
-   useCdn: true,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "",
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "",
+  useCdn: true,
 });
 
 
@@ -16,7 +16,7 @@ const client = createClient({
 
 export async function getBlogPageData() {
   return client.fetch(
-     groq`
+    groq`
         {
            "news": 
               *[_type=="news"] | order(date desc){
@@ -46,7 +46,7 @@ export async function getBlogPageData() {
 
 export async function getArticleData(slug: string) {
   return client.fetch(
-     groq`*[_type=="news" && slug.current == "${slug}"][0]{
+    groq`*[_type=="news" && slug.current == "${slug}"][0]{
         _id,
         _createdAt,
         title,
@@ -62,7 +62,7 @@ export async function getArticleData(slug: string) {
 
 export async function getMiscPageData(slug: string) {
   return client.fetch(
-     groq`*[_type=="miscellaneousPage" && slug.current == "${slug}"][0]{
+    groq`*[_type=="miscellaneousPage" && slug.current == "${slug}"][0]{
         _id,
         _createdAt,
         pageTitle,
@@ -72,8 +72,8 @@ export async function getMiscPageData(slug: string) {
 
   );
 }
- export async function getBlogData(slug: string){
-    const query=`
+export async function getBlogData(slug: string) {
+  const query = `
     *[_type=='news' && slug.current=='${slug}']{
         "CurrentSlug": slug.current,
           title,
@@ -83,15 +83,15 @@ export async function getMiscPageData(slug: string) {
        
            
        }[0]`;
-       const data= await client.fetch(query);
-       return data;
-    
+  const data = await client.fetch(query);
+  return data;
+
 }
 
 
 export async function getCareerPageData() {
-   return client.fetch(
-     groq`
+  return client.fetch(
+    groq`
        *[_type == "careers" && isOpeningActive == true] | order(_createdAt desc) {
          _id,
          title,
@@ -112,12 +112,12 @@ export async function getCareerPageData() {
          isOpeningActive
        }
      `
-   );
- }
+  );
+}
 
- export async function getCareerDetails(slug:string) {
-   return client.fetch(
-     groq`
+export async function getCareerDetails(slug: string) {
+  return client.fetch(
+    groq`
        *[_type == "careers" && slug.current == $slug][0] {
          _id,
          title,
@@ -138,13 +138,13 @@ export async function getCareerPageData() {
          isOpeningActive
        }
      `,
-     { slug }
-   );
- }
+    { slug }
+  );
+}
 
- export async function getClientPageData() {
-   return client.fetch(
-     groq`
+export async function getClientPageData() {
+  return client.fetch(
+    groq`
        *[_type == "client"] | order(_createdAt desc) {
          _id,
          name,
@@ -168,8 +168,29 @@ export async function getCareerPageData() {
          }
        }
      `
-   );
- }
+  );
+}
+
+// Fetching short urls : 
+
+export const getShortUrls = async () => {
+  try {
+    const result = await client.fetch(
+      groq`
+     *[_type == "shorturls"] {
+      title ,
+      slug,
+      source,
+      image
+    }
+      `
+    );
+    return result;
+  } catch (error) {
+    console.error('Error fetching short URLs:', error);
+    return [];
+  }
+};
 
 
 // #endregion
