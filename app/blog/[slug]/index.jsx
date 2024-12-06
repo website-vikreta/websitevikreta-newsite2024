@@ -93,7 +93,7 @@ export default function Page({ data }) {
   const [showInputBox, setShowInputBox] = useState({});
 
   const [formData, setFormData] = useState({
-    blogId: data._id,
+    blogId: data?.CurrentSlug,
     username: '',
     email: '',
     commentbox: ''
@@ -176,7 +176,7 @@ export default function Page({ data }) {
 
       if (commentResponse.ok) {
         setFormData({
-          blogId: data._id,
+          blogId: data?.CurrentSlug,
           username: "",
           email: "",
           // contact: "",
@@ -223,7 +223,7 @@ export default function Page({ data }) {
   //  Fetching user comments : 
   const getComments = async () => {
     try {
-      const result = await fetch(`/api/comment/${data._id}`, {
+      const result = await fetch(`/api/comment/${data?.CurrentSlug}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -239,7 +239,7 @@ export default function Page({ data }) {
   // Fetching the getComments only when the blogId changes : 
   useEffect(() => {
     getComments();
-  }, [data._id]);
+  }, [data?.CurrentSlug]);
 
 
   // For toggling the reply input box :
