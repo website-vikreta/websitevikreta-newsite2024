@@ -46,16 +46,16 @@ const ShowClientProject = ({ response }: { response: any }) => {
             </div>
 
             {/*  Image : */}
-            <div className="">
+            <div className="border-2 w-[600px] rounded-md h-[400px] overflow-hidden flex ">
                 {
                     projectImage &&
                     <Image
                         src={projectImage}
                         alt={projectTitle || "Client Project Image"}
-                        width={400}
-                        height={400}
+                        width={1000}
+                        height={1000}
                         style={{ objectFit: "cover" }}
-                        className="px-5  border-yellow-500"
+                        className=""
                         layout="intrinsic"
                     />
                 }
